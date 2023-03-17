@@ -1,13 +1,18 @@
 // TODO interface class to play and to display high score of the round
 // display the sucessful passes
 
+// TODO interface class to play and to display high score of the round
+// display the sucessful passes
+
 Bird floppy;
 ArrayList<Pipes> our_pipes= new ArrayList<Pipes>();
-boolean started = false;
+boolean started;
 
-void setup(){
-  size(1500,1000);
+void initialize(){  // to be able to reset in future we initialize every value at the beginning in a separate function
+  our_pipes.clear(); 
   floppy  = new Bird();
+  started = false;
+  
   int[] begXLocs = new int[10];
   
   for (int i = 0; i < 10; i++){     // creating x values for beginning use
@@ -19,6 +24,11 @@ void setup(){
   } 
 }
 
+void setup(){
+  size(1500,1000);
+  initialize();
+}
+
 void draw(){
   background(255);
 
@@ -28,7 +38,10 @@ void draw(){
   }// main game loop
 
   else{
-    background(255, 102, 102);   
+    background(255, 102, 102);
+    if (keyPressed){
+      initialize();  // reset everything if key is pressed
+    }
   }
 }
 
@@ -64,9 +77,6 @@ void main_gameLoop(){
       }
     }
   }
-
-
-
 
 
 boolean checkIntercept(Pipes pipe, Bird bird){
